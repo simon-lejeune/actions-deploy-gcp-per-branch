@@ -1,0 +1,21 @@
+name: Build and deploy to staging
+
+on: [ push ]
+
+jobs:
+  build:
+    runs-on: [ self-hosted ]
+    steps:
+      - name: Get branch name (merge)
+        if: github.event_name != 'pull_request'
+        shell: bash
+        run: echo "BRANCH_NAME=$(echo ${GITHUB_REF#refs/heads/} | tr / -)" >> $GITHUB_ENV
+
+      - name: Get branch name (pull request)
+        if: github.event_name == 'pull_request'
+        shell: bash
+        run: echo "BRANCH_NAME=$(echo ${GITHUB_HEAD_REF} | tr / -)" >> $GITHUB_ENV
+
+      - uses: actions/checkout@v2
+      - name: Build and run
+        run: sudo -- sh -c 'COMPOSE_PROJECT_NAME=${{ env.BRANCH_NAME }} docker-compose up -d --build'

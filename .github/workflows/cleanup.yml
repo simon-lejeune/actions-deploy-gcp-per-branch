@@ -1,0 +1,11 @@
+name: Cleanup on branch removal
+
+on: [ delete ]
+
+jobs:
+  build:
+    runs-on: [ self-hosted ]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Cleanup
+        run: sudo -- sh -c 'COMPOSE_PROJECT_NAME=${{ env.BRANCH_NAME }} sudo docker-compose down --volumes  --remove-orphans --rmi all'

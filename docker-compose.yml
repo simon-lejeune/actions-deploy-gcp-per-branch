@@ -1,0 +1,22 @@
+version: '3.3'
+
+services:
+  flask:
+    container_name: flask_${COMPOSE_PROJECT_NAME}
+    image: actions-deploy-gcp-per-branch:${COMPOSE_PROJECT_NAME}
+    expose:
+      - "5000"
+    build:
+      context: .
+      args:
+        - APP_BASE_URL=/${COMPOSE_PROJECT_NAME}/
+    labels:
+      - "traefik.http.routers.flask_${COMPOSE_PROJECT_NAME}.rule=Host(`stg.example.com`) && PathPrefix(`/${COMPOSE_PROJECT_NAME}/`)"
+      - "traefik.http.routers.flask_${COMPOSE_PROJECT_NAME}.middlewares=flask_${COMPOSE_PROJECT_NAME}-stripprefix"
+      - "traefik.http.middlewares.flask_${COMPOSE_PROJECT_NAME}-stripprefix.stripprefix.prefixes=/${COMPOSE_PROJECT_NAME}"
+      - "traefik.docker.network=network-traefik"
+    networks:
+      - "network-traefik"
+networks:
+  network-traefik:
+    external: true
