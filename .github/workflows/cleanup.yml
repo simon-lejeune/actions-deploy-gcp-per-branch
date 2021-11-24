@@ -8,4 +8,4 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Cleanup
-        run: sudo -- sh -c 'COMPOSE_PROJECT_NAME=${{ env.BRANCH_NAME }} sudo docker-compose down --volumes  --remove-orphans --rmi all'
+        run: COMPOSE_PROJECT_NAME=${{ env.BRANCH_NAME }} docker-compose down --volumes  --remove-orphans --rmi all
