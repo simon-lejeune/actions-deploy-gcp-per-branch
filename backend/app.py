@@ -4,10 +4,9 @@ app = Flask(__name__)
 
 @app.route("/")
 def main():
-    return "you're on the <strong>master</strong> QQ"
+    return "fb1"
 
 
 @app.route("/test")
 def test():
-    return "you're on the <strong>master</strong> QQ"
-
+    return "fb1
