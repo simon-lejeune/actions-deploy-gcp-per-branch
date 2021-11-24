@@ -9,4 +9,4 @@ def main():
 
 @app.route("/test")
 def test():
-    return "fb1
+    return "fb1"
