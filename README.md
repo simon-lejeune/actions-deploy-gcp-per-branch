@@ -37,3 +37,11 @@ docker-compose up
 - [Continuous Delivery With Github Actions, Docker and Traefik on a Virtual Private Server (Part 1)](https://dev.to/alexandrupero/continuous-delivery-with-github-actions-docker-and-traefik-on-a-virtual-private-server-part-1-3285)
 
 - [Traefik quick start](https://doc.traefik.io/traefik/getting-started/quick-start/)
+
+## todo
+
+- [ ] fix image deletion
+- [ ] move branchname to subdomain
+- [ ] letsencrypt integration
+- [ ] make a test with a database
+- [ ] feedback when eror in code and the server doesn't start
